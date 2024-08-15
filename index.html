@@ -13,10 +13,12 @@
         padding: 0;
       }
       #app {
-        width: 100vw;
+        width: 100%;
         height: 100vh;
         background: url("/img/bg.png") no-repeat;
         background-size: 100% 100%;
+
+        /* padding: 0 20px; */
       }
       #hb-wrap {
         width: 100%;
@@ -25,61 +27,77 @@
         background-size: 100% 100%;
       }
 
-      .text-red {
-        color: red;
-      }
-      #card-item {
-        /* Overall card styling */
-        display: flex; /* Use flexbox for easy layout */
-        align-items: center; /* Vertically align items */
-        padding: 1rem; /* Add some padding around the card */
-        border: 1px solid #ccc; /* Add a border */
-        border-radius: 5px; /* Round the corners */
-        background-color: #fff; /* White background */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+      .card-item {
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+        margin-bottom: 10px;
       }
 
       .headPortrait {
-        /* Style for the portrait image */
-        width: 50px; /* Adjust width as needed */
-        height: 50px; /* Adjust height as needed */
-        margin-right: 1rem; /* Add some space between portrait and content */
+        width: 50px;
+        height: 50px;
+        margin-right: 1rem;
       }
 
       .headPortrait img {
-        /* Style for the image itself */
-        width: 100%; /* Make the image fill the container */
-        height: 100%; /* Make the image fill the container */
-        object-fit: cover; /* Ensure the image covers the container */
-        border-radius: 50%; /* Make the image circular */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
       }
 
       .center {
-        /* Style for the center content area */
-        flex: 1; /* Make the center content take up available space */
+        flex: 1;
       }
 
       .title {
-        /* Style for the title */
         font-size: 1.2rem;
         font-weight: bold;
-        margin-bottom: 0.5rem;
       }
 
       .time {
-        /* Style for the time */
         font-size: 0.9rem;
-        color: #666;
       }
 
       .right {
-        /* Style for the right content area */
-        /* Add your desired styling here */
+        width: 20vw;
+        text-align: center;
       }
-      #banner{
+      #banner {
         width: 70vw;
         background: url("/img/banner.png") no-repeat;
         background-size: cover;
+      }
+      #card {
+        height: 40vh;
+        background-color: #dfebff;
+        border-radius: 10px;
+
+        margin: 0 20px;
+        padding: 20px;
+
+        color: red;
+      }
+      .card-header {
+        /* background-image: url("/img/start.png"); */
+        /* background-size: 100% 100%; */
+        /* text-align: center; */
+      }
+      .relative {
+        position: relative;
+      }
+      .m-auto {
+        margin: 0 auto;
+      }
+      .flex {
+        display: flex;
+      }
+      .justify-center {
+        justify-content: center;
+      }
+      .align-center {
+        align-items: center;
       }
     </style>
   </head>
@@ -90,46 +108,60 @@
         <h3 id="banner"></h3>
         <h3 id="example4">今天已送出￥8672387.00</h3>
       </div>
-      <div id="hb-wrap"></div>
+      <!-- <div id="hb-wrap"></div> -->
       <div id="card">
-        <div id="card-item">
+        <div class="card-header relative flex justify-center align-center">
+          <img src="/img/start.png" alt="" style="width: 50vw" class="m-auto" />
+          <span
+            style="
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              font-size: 1.2rem;
+              font-weight:600;
+            "
+            >动态收益墙</span
+          >
+        </div>
+        <div class="card-item" v-for="(item,index) in cards" :key="index">
           <div class="headPortrait">
             <img src="/img/tx.png" alt="" />
           </div>
           <div class="center">
-            <div class="title">试玩一起</div>
-            <div class="time">1分钟前</div>
+            <div class="title">{{item.title}}</div>
+            <div class="time">{{item.time}}</div>
           </div>
-          <div class="right"></div>
+          <div class="right">{{item.rightContent}}</div>
         </div>
       </div>
     </div>
     <script>
-      const {createApp} = Vue;
+      const { createApp } = Vue;
       const app = createApp({
         data() {
           return {
             cards: [
               {
                 imageUrl: "/img/tx.png",
-                title: "Card Title 1",
-                time: "10:00 AM",
-                rightContent: "Some right content",
+                title: "试玩一起",
+                time: "1分钟前",
+                rightContent: "20",
               },
               {
                 imageUrl: "/img/tx.png",
-                title: "Card Title 2",
-                time: "11:30 AM",
-                rightContent: "More right content",
+                title: "试玩一起",
+                time: "1分钟前",
+                rightContent: "20",
               },
-               
             ],
           };
         },
         mounted() {
-          var $example4	= $('#example4').hide();
-          console.log($);$example4.show().arctext({radius: 600});
-        }
+          var $example4 = $("#example4").hide();
+          console.log($);
+          $example4.show().arctext({ radius: 600 });
+        },
       });
 
       app.mount("#app");
