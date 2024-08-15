@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.arctext.js"></script>
+    <script src="js/vue.global.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #app {
+        width: 100vw;
+        height: 100vh;
+        background: url("/img/bg.png") no-repeat;
+        background-size: 100% 100%;
+      }
+      #hb-wrap {
+        width: 100%;
+        height: 100%;
+        background: url("/img/hb.png") no-repeat;
+        background-size: 100% 100%;
+      }
+
+      .text-red {
+        color: red;
+      }
+      #card-item {
+        /* Overall card styling */
+        display: flex; /* Use flexbox for easy layout */
+        align-items: center; /* Vertically align items */
+        padding: 1rem; /* Add some padding around the card */
+        border: 1px solid #ccc; /* Add a border */
+        border-radius: 5px; /* Round the corners */
+        background-color: #fff; /* White background */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+      }
+
+      .headPortrait {
+        /* Style for the portrait image */
+        width: 50px; /* Adjust width as needed */
+        height: 50px; /* Adjust height as needed */
+        margin-right: 1rem; /* Add some space between portrait and content */
+      }
+
+      .headPortrait img {
+        /* Style for the image itself */
+        width: 100%; /* Make the image fill the container */
+        height: 100%; /* Make the image fill the container */
+        object-fit: cover; /* Ensure the image covers the container */
+        border-radius: 50%; /* Make the image circular */
+      }
+
+      .center {
+        /* Style for the center content area */
+        flex: 1; /* Make the center content take up available space */
+      }
+
+      .title {
+        /* Style for the title */
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .time {
+        /* Style for the time */
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .right {
+        /* Style for the right content area */
+        /* Add your desired styling here */
+      }
+      #banner{
+        width: 70vw;
+        background: url("/img/banner.png") no-repeat;
+        background-size: cover;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div id="header">
+        <h3 id="banner"></h3>
+        <h3 id="example4">今天已送出￥8672387.00</h3>
+      </div>
+      <div id="hb-wrap"></div>
+      <div id="card">
+        <div id="card-item">
+          <div class="headPortrait">
+            <img src="/img/tx.png" alt="" />
+          </div>
+          <div class="center">
+            <div class="title">试玩一起</div>
+            <div class="time">1分钟前</div>
+          </div>
+          <div class="right"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const {createApp} = Vue;
+      const app = createApp({
+        data() {
+          return {
+            cards: [
+              {
+                imageUrl: "/img/tx.png",
+                title: "Card Title 1",
+                time: "10:00 AM",
+                rightContent: "Some right content",
+              },
+              {
+                imageUrl: "/img/tx.png",
+                title: "Card Title 2",
+                time: "11:30 AM",
+                rightContent: "More right content",
+              },
+               
+            ],
+          };
+        },
+        mounted() {
+          var $example4	= $('#example4').hide();
+          console.log($);$example4.show().arctext({radius: 600});
+        }
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>
