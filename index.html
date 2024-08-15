@@ -1,194 +1,467 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script type="text/javascript" src="./js/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/jquery.arctext.js"></script>
-    <script src="js/vue.global.min.js"></script>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
-      #app {
-        width: 100%;
-        height: 100vh;
-        background: url("/img/bg.png") no-repeat;
-        background-size: 100% 100%;
 
-        /* padding: 0 20px; */
-      }
-      #hb-wrap {
-        width: 100%;
-        height: 100%;
-        background: url("/img/hb.png") no-repeat;
-        background-size: 100% 100%;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script type="text/javascript" src="./js/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/jquery.arctext.js"></script>
+  <script src="js/vue.global.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #app {
+      width: 100%;
+      height: 100vh;
+      background: url("/img/bg.png") no-repeat;
+      background-size: 100% 100%;
+
+      /* padding: 0 20px; */
+    }
+
+
+
+    .card-item {
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .headPortrait {
+      width: 3rem;
+      height: 3rem;
+      margin-right: 1rem;
+    }
+
+    .headPortrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .center .title {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .center .time {
+      font-size: 0.8rem;
+    }
+
+    .right {
+      width: 20vw;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+
+    #banner {
+      width: 70vw;
+      background: url("/img/banner.png") no-repeat;
+      background-size: cover;
+    }
+
+    #card {
+      height: 45vh;
+      background-color: #dfebff;
+      border-radius: 0.5rem;
+
+      margin: 0 20px;
+      padding: 20px;
+      color: red;
+      overflow: hidden;
+    }
+
+    .card-header {
+      margin-bottom: 1rem;
+    }
+
+    .relative {
+      position: relative;
+    }
+
+    .m-auto {
+      margin: 0 auto;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+
+    .align-center {
+      align-items: center;
+    }
+
+    .btn {
+      width: 60vw;
+      --h: 17.3vw;
+      height: var(--h);
+      background-image: url("./img/btn.png");
+      background-size: 100% 100%;
+      color: red;
+      font-weight: 600;
+      margin: auto;
+      text-align: center;
+      line-height: calc(var(--h) - 1.6vw);
+    }
+
+
+
+    .banner {
+      width: 17rem;
+      --h: 4rem;
+      height: var(--h);
+      background-image: url("./img/banner.png");
+      background-size: 100% 100%;
+      margin: auto;
+    }
+
+    .w-text {
+      transform: scale(0.8);
+      position: absolute;
+      left: 19.1vw;
+      top: 1.7vh;
+    }
+
+    .relative {
+      position: relative;
+    }
+
+    #header {
+      position: relative;
+
+    }
+
+    .countDown {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      margin-top: 15vw;
+    }
+
+    .hb {
+      background-image: url(/img/hb.png);
+      width: 90vw;
+      --h: 22rem;
+      height: var(--h);
+
+      background-size: 100% 100%;
+
+      position: relative;
+      box-sizing: border-box;
+      padding-top: 18vw;
+      margin: -5.2vw auto 0;
+    }
+
+    .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .text-red {
+      color: red;
+    }
+
+    .hb-header {
+      display: flex;
+      gap: 2vw;
+    }
+
+    .hb-money {
+      display: flex;
+      align-items: flex-end;
+      font-weight: 500;
+    }
+
+    .wrapper {
+      --logo-width: 200px;
+      --logo-height: 48px;
+      --gap: 10px;
+      --duration: 20s;
+      --scroll-end: calc(-100% - var(--gap));
+    }
+
+    .marquee {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      user-select: none;
+      gap: var(--gap);
+    }
+
+    .marquee__group {
+      animation: scrollLeft var(--duration) linear infinite;
+    }
+
+    @keyframes scrollLeft {
+      from {
+        transform: translateY(0);
       }
 
-      .card-item {
-        display: flex;
-        align-items: center;
-        border-radius: 5px;
-        margin-bottom: 10px;
+      to {
+        transform: translateY(var(--scroll-end));
       }
+    }
+  </style>
+</head>
 
-      .headPortrait {
-        width: 3rem;
-        height: 3rem;
-        margin-right: 1rem;
-      }
+<body>
+  <div id="app">
+    <div id="header">
+      <h3 class="banner"></h3>
+      <h3 id="example4" class="w-text" style="color: #A04134;">今天已送出￥8672387.00</h3>
+    </div>
 
-      .headPortrait img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-      }
-
-      .center {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .center .title {
-        font-size: 1rem;
-        font-weight: bold;
-      }
-
-      .center .time {
-        font-size: 0.8rem;
-      }
-
-      .right {
-        width: 20vw;
-        text-align: center;
-      }
-
-      #banner {
-        width: 70vw;
-        background: url("/img/banner.png") no-repeat;
-        background-size: cover;
-      }
-
-      #card {
-        height: 40vh;
-        background-color: #dfebff;
-        border-radius: 0.5rem;
-
-        margin: 0 20px;
-        padding: 20px;
-
-        color: red;
-      }
-      .card-header {
-        margin-bottom: 1rem;
-      }
-      .relative {
-        position: relative;
-      }
-      .m-auto {
-        margin: 0 auto;
-      }
-      .flex {
-        display: flex;
-      }
-      .justify-center {
-        justify-content: center;
-      }
-      .align-center {
-        align-items: center;
-      }
-      .btn {
-        width: 20rem;
-        --h: 4rem;
-        height: var(--h);
-        background-image: url("./img/btn.png");
-        background-size: 100% 100%;
-        text-align: center;
-        line-height: var(--h);
-      }
-    </style>
-  </head>
-
-  <body>
-    <div id="app">
-      <div id="header">
-        <h3 id="banner"></h3>
-        <h3 id="example4">今天已送出￥8672387.00</h3>
-      </div>
-      <!-- <div id="hb-wrap"></div> -->
-      <div class="btn">立即领取</div>
-      <div id="card">
-        <div class="card-header relative flex justify-center align-center">
-          <img src="/img/start.png" alt="" style="width: 50vw" class="m-auto" />
-          <span
-            style="
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              font-size: 1.2rem;
-              font-weight: 600;
-            "
-            >动态收益墙</span
-          >
+    <div class="hb">
+      <div class="hb-header text-red ">
+        <div class="flex m-auto">
+          <img src="/img/shouqizuijia.png" alt="" style="width: 5vw;height: 5vw;">
+          <span>手气最佳</span>
         </div>
-        <div class="card-item" v-for="(item,index) in cards" :key="index">
-          <div class="headPortrait">
-            <img src="/img/tx.png" alt="" />
+      </div>
+      <div class="flex justify-center">
+        <div class="hb-money text-red ">
+          <span>
+            <span style="font-size: 1rem;">￥</span>
+            <span style="font-size: 4rem;">20</span>
+          </span>
+        </div>
+      </div>
+      <div class="countDown">
+        <div class="flex">
+          <div style="background-color: red;margin-right: 0.2rem;">{{minute}}</div>
+        </div>
+        <div style="margin-right: 0.2rem;">分</div>
+        <div style="background-color: red;margin-right: 0.2rem;">{{second}}</div>
+        <div>秒过期</div>
+      </div>
+      <div class="btn  ">
+        <span>立即领取</span>
+      </div>
+    </div>
+
+    <div id="card">
+      <div class="card-header relative flex justify-center align-center">
+        <img src="/img/start.png" alt="" style="width: 50vw" class="m-auto" />
+        <span style="
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-56.1%, -61.2%);
+                font-size: 1.2rem;
+                font-weight: 600;
+              ">动态收益墙</span>
+      </div>
+      <div class="wrapper">
+
+        <div class="marquee ">
+          <div class="marquee__group">
+            <div class="card-item " v-for="(item,index) in cards" :key="index">
+              <div class="headPortrait">
+                <img src="/img/tx.png" alt="" />
+              </div>
+              <div class="center">
+                <div class="title">{{item.title}}</div>
+                <div class="time">{{item.time}}</div>
+              </div>
+              <div class="right">
+                <span v-if="item.rightContent">
+                  <span style="font-size: 1rem;">￥</span>
+                  <span>{{item.rightContent}}</span>
+                </span>
+              </div>
+            </div>
           </div>
-          <div class="center">
-            <div class="title">{{item.title}}</div>
-            <div class="time">{{item.time}}</div>
+          <div class="marquee__group">
+            <div class="card-item " v-for="(item,index) in cards" :key="index">
+              <div class="headPortrait">
+                <img src="/img/tx.png" alt="" />
+              </div>
+              <div class="center">
+                <div class="title">{{item.title}}</div>
+                <div class="time">{{item.time}}</div>
+              </div>
+              <div class="right">
+                <span v-if="item.rightContent">
+                  <span style="font-size: 1rem;">￥</span>
+                  <span>{{item.rightContent}}</span>
+                </span>
+              </div>
+            </div>
           </div>
-          <div class="right">{{item.rightContent}}</div>
+
         </div>
       </div>
     </div>
-    <script>
-      const { createApp } = Vue;
-      const app = createApp({
-        data() {
-          return {
-            cards: [
-              {
-                id: 1,
-                imageUrl: "/img/tx.png",
-                title: "试玩一起",
-                time: "1分钟前",
-                rightContent: "20",
-              },
 
-              {
-                id: 2,
-                imageUrl: "/img/tx.png",
-                title: "试玩一起",
-                time: "1分钟前",
-                rightContent: "20",
-              },
-              {
-                id: 3,
-                imageUrl: "/img/tx.png",
-                title: "试玩一起",
-                time: "1分钟前",
-              },
-              {
-                
+  </div>
+  <script>
+    const { createApp } = Vue;
+    const app = createApp({
+      data() {
+        return {
+          minute: '4',
+          second: '59',
+          cards: [
+            {
+              id: 1,
+              imageUrl: "/img/tx.png",
+              title: "试玩一起",
+              time: "1分钟前",
+              rightContent: "20",
+            },
+
+            {
+              id: 2,
+              imageUrl: "/img/tx.png",
+              title: "试玩一起",
+              time: "1分钟前",
+              rightContent: "20",
+            },
+            {
+              id: 3,
+              imageUrl: "/img/tx.png",
+              title: "试玩一起",
+              time: "1分钟前",
+              rightContent: "20",
+            },
+            {
+              id: 4,
+              imageUrl: "/img/tx.png",
+              title: "试玩一起",
+              time: "1分钟前",
+              rightContent: "20",
+            },
+            {
+              id: 5,
+              imageUrl: "/img/tx.png",
+              title: "试玩一起",
+              time: "1分钟前",
+              rightContent: "20",
+            },
+            {
+              id: 6,
+              imageUrl: "/img/tx.png",
+              title: "试玩一起",
+              time: "1分钟前",
+              rightContent: "20",
+            },
+            {
+              "id": 7,
+              "imageUrl": "/img/tx.png",
+              "title": "试玩一起",
+              "time": "1分钟前",
+              "rightContent": "20"
+            },
+            {
+              "id": 8,
+              "imageUrl": "/img/tx.png",
+              "title": "试玩一起",
+              "time": "1分钟前",
+              "rightContent": "20"
+            },
+            {
+              "id": 9,
+              "imageUrl": "/img/tx.png",
+              "title": "试玩一起",
+              "time": "1分钟前",
+              "rightContent": "20"
+            },
+            {
+              "id": 10,
+              "imageUrl": "/img/tx.png",
+              "title": "试玩一起",
+              "time": "1分钟前",
+              "rightContent": "20"
+            },
+            {
+              "id": 11,
+              "imageUrl": "/img/tx.png",
+              "title": "试玩一起",
+              "time": "1分钟前",
+              "rightContent": "20"
+            },
+            {
+              "id": 12,
+              "imageUrl": "/img/tx.png",
+              "title": "试玩一起",
+              "time": "1分钟前",
+              "rightContent": "20"
+            },
+            {
+              "id": 13,
+              "imageUrl": "/img/tx.png",
+              "title": "试玩一起",
+              "time": "1分钟前",
+              "rightContent": "20"
+            },
+            {
+              "id": 14,
+              "imageUrl": "/img/tx.png",
+              "title": "试玩一起",
+              "time": "1分钟前",
+              "rightContent": "20"
+            },
+            {
+              "id": 15,
+              "imageUrl": "/img/tx.png",
+              "title": "试玩一起",
+              "time": "1分钟前",
+              "rightContent": "20"
+            },
+          ],
+        };
+      },
+      mounted() {
+        var $example4 = $("#example4").hide();
+        console.log($);
+        $example4.show().arctext({ radius: 770 });
+        const vm = this
+        function countdown(duration) {
+          let minutes = Math.floor(duration / 60);
+          let seconds = duration % 60;
+          const timer = setInterval(() => {
+            // 每秒更新时间
+            seconds--;
+            if (seconds < 0) {
+              if (minutes === 0) {
+                clearInterval(timer);
+                return;
               }
-            ],
-          };
-        },
-        mounted() {
-          var $example4 = $("#example4").hide();
-          console.log($);
-          $example4.show().arctext({ radius: 600 });
-        },
-      });
+              minutes--;
+              seconds = 59;
+            }
+            vm.seconds = seconds;
+            vm.minutes = minutes;
+            console.log('vm: ', vm);
+          }, 1000);
+        }
 
-      app.mount("#app");
-    </script>
-  </body>
+        countdown(300);
+
+      },
+    });
+
+    app.mount("#app");
+  </script>
+</body>
+
 </html>
