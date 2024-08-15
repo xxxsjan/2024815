@@ -16,11 +16,10 @@
 
     #app {
       width: 100%;
-      height: 100vh;
-      background: url("/img/bg.png") no-repeat;
+      height: 100%;
+      min-height: 100vh;
+      background: url("/img/bg.png");
       background-size: 100% 100%;
-
-      /* padding: 0 20px; */
     }
 
 
@@ -135,8 +134,8 @@
     .w-text {
       transform: scale(0.8);
       position: absolute;
-      left: 19.1vw;
-      top: 1.7vh;
+      left: 21.1vw;
+      top: 1.4vh;
     }
 
     .relative {
@@ -247,10 +246,10 @@
       </div>
       <div class="countDown">
         <div class="flex">
-          <div style="background-color: red;margin-right: 0.2rem;">{{minute}}</div>
+          <div style="background-color: red;margin-right: 0.2rem;" id="minute">{{minute}}</div>
         </div>
         <div style="margin-right: 0.2rem;">分</div>
-        <div style="background-color: red;margin-right: 0.2rem;">{{second}}</div>
+        <div style="background-color: red;margin-right: 0.2rem;" id="second">{{second}}</div>
         <div>秒过期</div>
       </div>
       <div class="btn  ">
@@ -434,7 +433,7 @@
         var $example4 = $("#example4").hide();
         console.log($);
         $example4.show().arctext({ radius: 770 });
-        const vm = this
+
         function countdown(duration) {
           let minutes = Math.floor(duration / 60);
           let seconds = duration % 60;
@@ -449,9 +448,9 @@
               minutes--;
               seconds = 59;
             }
-            vm.seconds = seconds;
-            vm.minutes = minutes;
-            console.log('vm: ', vm);
+
+            $('#minute').text(minutes);
+            $('#second').text(seconds < 10 ? '0' + seconds : seconds);
           }, 1000);
         }
 
