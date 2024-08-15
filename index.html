@@ -101,9 +101,14 @@
       .align-center {
         align-items: center;
       }
-      .btn{
-        background-image: url("/img/btn.png");
+      .btn {
+        width: 20rem;
+        --h: 4rem;
+        height: var(--h);
+        background-image: url("./img/btn.png");
         background-size: 100% 100%;
+        text-align: center;
+        line-height: var(--h);
       }
     </style>
   </head>
@@ -115,9 +120,7 @@
         <h3 id="example4">今天已送出￥8672387.00</h3>
       </div>
       <!-- <div id="hb-wrap"></div> -->
-      <div class="btn">
-
-      </div>
+      <div class="btn">立即领取</div>
       <div id="card">
         <div class="card-header relative flex justify-center align-center">
           <img src="/img/start.png" alt="" style="width: 50vw" class="m-auto" />
