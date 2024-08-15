@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .wrapper {
+        --logo-width: 200px;
+        --logo-height: 100px;
+        --gap: calc(var(--logo-width) / 14);
+        --duration: 5s;
+        --scroll-end: calc(-100% - var(--gap));
+        max-width: 100vw;
+      }
+
+      .marquee {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        user-select: none;
+        gap: var(--gap);
+      }
+
+      .marquee__group {
+        min-width: 100%;
+        animation: scrollLeft var(--duration) linear infinite;
+      }
+   
+
+      .item {
+        width: var(--logo-width);
+        height: var(--logo-height);
+        border-radius: 6px;
+      }
+
+      @keyframes scrollLeft {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(var(--scroll-end));
+        }
+      }
+    </style>
+    <div class="wrapper">
+      <div class="marquee">
+    
+        <div class="marquee__group">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+          <div class="item">6</div>
+          <div class="item">7</div>
+          <div class="item">8</div>
+        </div>
+        <div class="marquee__group">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+          <div class="item">6</div>
+          <div class="item">7</div>
+          <div class="item">8</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

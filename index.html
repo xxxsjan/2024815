@@ -35,8 +35,8 @@
       }
 
       .headPortrait {
-        width: 50px;
-        height: 50px;
+        width: 3rem;
+        height: 3rem;
         margin-right: 1rem;
       }
 
@@ -49,30 +49,34 @@
 
       .center {
         flex: 1;
+        display: flex;
+        flex-direction: column;
       }
 
-      .title {
-        font-size: 1.2rem;
+      .center .title {
+        font-size: 1rem;
         font-weight: bold;
       }
 
-      .time {
-        font-size: 0.9rem;
+      .center .time {
+        font-size: 0.8rem;
       }
 
       .right {
         width: 20vw;
         text-align: center;
       }
+
       #banner {
         width: 70vw;
         background: url("/img/banner.png") no-repeat;
         background-size: cover;
       }
+
       #card {
         height: 40vh;
         background-color: #dfebff;
-        border-radius: 10px;
+        border-radius: 0.5rem;
 
         margin: 0 20px;
         padding: 20px;
@@ -80,9 +84,7 @@
         color: red;
       }
       .card-header {
-        /* background-image: url("/img/start.png"); */
-        /* background-size: 100% 100%; */
-        /* text-align: center; */
+        margin-bottom: 1rem;
       }
       .relative {
         position: relative;
@@ -99,6 +101,10 @@
       .align-center {
         align-items: center;
       }
+      .btn{
+        background-image: url("/img/btn.png");
+        background-size: 100% 100%;
+      }
     </style>
   </head>
 
@@ -109,6 +115,9 @@
         <h3 id="example4">今天已送出￥8672387.00</h3>
       </div>
       <!-- <div id="hb-wrap"></div> -->
+      <div class="btn">
+
+      </div>
       <div id="card">
         <div class="card-header relative flex justify-center align-center">
           <img src="/img/start.png" alt="" style="width: 50vw" class="m-auto" />
@@ -119,7 +128,7 @@
               left: 50%;
               transform: translate(-50%, -50%);
               font-size: 1.2rem;
-              font-weight:600;
+              font-weight: 600;
             "
             >动态收益墙</span
           >
